@@ -1,4 +1,4 @@
-const inquirer = require ('inquirer');
+const inquirer = require('inquirer');
 inquirer.registerPrompt('recursive', require('inquirer-recursive'));
 const generateHTML = require('./src/page-template.js')
 const { writeFile, copyFile } = require('./src/generateHtml.js');
@@ -69,7 +69,7 @@ const appPrompts = [
         type: 'recursive',
         name: 'more',
         message: 'Would you like to add more team members?',
-        promptes : [
+        prompts: [
             {
                 type: 'list',
                 name: 'employeeType',
@@ -84,33 +84,70 @@ const appPrompts = [
                 type: 'input',
                 name: 'engineerName',
                 message: "What is the Employee's name?",
-                when: ({employeeType}) => {
+                when: ({ employeeType }) => {
                     if (employeeType === 'Engineer') return true;
                     else return false;
                 }
+            },
+
+            {
+                type: 'input',
+                name: 'engineerID',
+                message: "What is the Employee's ID Number?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Engineer') return true;
+                    else return false;
+                }
+            },
+
+            {
+                type: 'input',
+                name: 'engineerEmail',
+                message: "What is the Employee's Email Address?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Engineer') return true;
+                    else return false;
+                }
+            },
+
+            {
+                type: 'input',
+                name: 'engineerGithub',
+                message: "What is the Employee's Github Username?",
+               
             }
-        ] 
+        ]
     }
 ];
 
 inquirer.prompt(appPrompts)
-.then ((answers) => {
-    const manager = new Manager (answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber);
-    mgrArr.push(manager);
-})
-.then (() => {
-    return generateHTML(mgrArr);
-})
-.then(pageHTML => {
-    return writeFile(pageHTML);
-})
-.then (writeFileResponse => {
-    console.log(writeFileResponse);
-    return copyFile();
-})
-.then(copyFileResponse => {
-    console.log(copyFileResponse);
-})
-.catch( err => {
-    console.log(err);
-});
+    .then((answers) => {
+        const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber);
+        mgrArr.push(manager);
+
+
+        if (answers.more){
+            for ( let i=0; i<answers.more.length; i++){
+                if (answers.more[i].employeeType === 'Engineer'){
+                    const engineer = new Engineer(answers.more[i].engineerName, answers.more[i].engineerID, answers.more[i].engineerEmail, answers.more[i].engineerGithub);
+                    engrArr.push = (engineer);
+                }
+            }
+        }
+    })
+    .then(() => {
+        return generateHTML(mgrArr,engrArr);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log(copyFileResponse);
+    })
+    .catch(err => {
+        console.log(err);
+    });
