@@ -47,12 +47,33 @@ const generateEngineer = engrArr => {
     
 }
 
+const generateIntern = internArr => {
+    if(internArr.length === 0){
+        return '';
+    }
 
+    let htmlContent = ``;
+    for(let i=0; i<internArr.length; i++){
+        htmlContent += `<div class="card col-3 p-0 m-2">
+        <div class="card-header bg-primary">
+            <h3>${internArr[i].getName()}</h3>
+            <p>${internArr[i].getRole()}</p>
+        </div>
+        <div class="card-content">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${internArr[i].getId()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${internArr[i].getEmail()}">${internArr[i].getEmail()}</a></li>
+                <li class="list-group-item">School: ${internArr[i].getSchool()}</li>
+            </ul>
+        </div>
+        </div>
+    `;
+    }
 
-   
+    return htmlContent;
+}
 
-
-module.exports = (mgrArr, engrArr) => {
+module.exports = (mgrArr, engrArr, internArr) => {
 
     return `
       <!DOCTYPE html>
@@ -77,6 +98,9 @@ module.exports = (mgrArr, engrArr) => {
             </div>
             <div class="row justify-content-center">
                 ${generateEngineer(engrArr)}
+            </div>
+            <div class="row justify-content-center">
+                ${generateIntern(internArr)}
             </div>
             
         </main>

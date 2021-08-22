@@ -83,7 +83,7 @@ const appPrompts = [
             {
                 type: 'input',
                 name: 'engineerName',
-                message: "What is the Employee's name?",
+                message: "What is the Engineer's name?",
                 when: ({ employeeType }) => {
                     if (employeeType === 'Engineer') return true;
                     else return false;
@@ -93,7 +93,7 @@ const appPrompts = [
             {
                 type: 'input',
                 name: 'engineerID',
-                message: "What is the Employee's ID Number?",
+                message: "What is the Engineer's ID Number?",
                 when: ({ employeeType }) => {
                     if (employeeType === 'Engineer') return true;
                     else return false;
@@ -103,7 +103,7 @@ const appPrompts = [
             {
                 type: 'input',
                 name: 'engineerEmail',
-                message: "What is the Employee's Email Address?",
+                message: "What is the Engineer's Email Address?",
                 when: ({ employeeType }) => {
                     if (employeeType === 'Engineer') return true;
                     else return false;
@@ -113,8 +113,53 @@ const appPrompts = [
             {
                 type: 'input',
                 name: 'engineerGithub',
-                message: "What is the Employee's Github Username?",
+                message: "What is the Engineer's Github Username?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Engineer') return true;
+                    else return false;
+                }
                
+            },
+            
+
+            {
+                type: 'input',
+                name: 'internName',
+                message: "What is the Intern's name?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Intern') return true;
+                    else return false;
+                }
+            },
+
+            {
+                type: 'input',
+                name: 'internID',
+                message: "What is the Intern's ID Number?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Intern') return true;
+                    else return false;
+                }
+            },
+
+            {
+                type: 'input',
+                name: 'internEmail',
+                message: "What is the Intern's Email Address?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Intern') return true;
+                    else return false;
+                }
+            },
+
+            {
+                type: 'input',
+                name: 'internSchool',
+                message: "What School is the Intern Enrolled in?",
+                when: ({ employeeType }) => {
+                    if (employeeType === 'Intern') return true;
+                    else return false;
+                }
             }
         ]
     }
@@ -126,17 +171,21 @@ inquirer.prompt(appPrompts)
         mgrArr.push(manager);
 
 
-        if (answers.more){
-            for ( let i=0; i<answers.more.length; i++){
-                if (answers.more[i].employeeType === 'Engineer'){
+        if(answers.more){
+            for(let i=0; i<answers.more.length; i++){
+                if(answers.more[i].employee === 'Engineer'){
                     const engineer = new Engineer(answers.more[i].engineerName, answers.more[i].engineerID, answers.more[i].engineerEmail, answers.more[i].engineerGithub);
-                    engrArr.push = (engineer);
+                    engineerArr.push(engineer);  
+                } else {
+                    const intern = new Intern(answers.more[i].internName, answers.more[i].internID, answers.more[i].internEmail, answers.more[i].internSchool);
+                    internArr.push(intern);
                 }
             }
         }
+        return;
     })
     .then(() => {
-        return generateHTML(mgrArr,engrArr);
+        return generateHTML(mgrArr,engrArr,internArr);
     })
     .then(pageHTML => {
         return writeFile(pageHTML);
