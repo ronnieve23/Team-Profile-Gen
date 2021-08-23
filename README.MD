@@ -1,4 +1,4 @@
-# README-GEN  ![MIT BADGE](https://img.shields.io/badge/License-MIT-blue.svg)
+# Team-Profile-Gen  ![MIT BADGE](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Description
 This Repository contains code for Rutgers Coding Bootcamp's Challenge 10 "Object Oriented Programming - Team Profile Generator". 
