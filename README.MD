@@ -55,7 +55,7 @@ The app utilizes Node.js , Inquirer package, Inquirer-Recursive, and Jest(for te
 
  ## Tests
 
- You can test different functionalities of the app by trying to apply different licenses to your README to see if it will generate the correct badge. Try to not enter anything when answering the prompt and see what happens!
+ Run the command "npm run test" in the terminal.
 
  ## Questions 
 
