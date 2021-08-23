@@ -28,11 +28,11 @@ The app utilizes Node.js , Inquirer package, Inquirer-Recursive, and Jest(for te
 
 2. Clone the repository OR download the code from https://github.com/ronnieve23/Team-Profile-Gen
 
-3. Navigate to where you saved the downloaded/cloned repository; Right click on the repostiory folder (README-Gen) and select "New Terminal at folder". *(see installation notes)*
+3. Navigate to where you saved the downloaded/cloned repository; Right click on the repostiory folder (Team-Profile-Gen) and select "New Terminal at folder". *(see installation notes)*
 
 4. Inside the terminal, type "npm i" and hit enter. Wait for the installation to finish.
 
-5. Type "node index.js" and hit enter. You will be asked to answer a series of prompts; each answer will go towards your generated README file! You should see the message "HTML Generated" after all the prompts are answered.
+5. Type "node index.js" and hit enter. You will be asked to answer a series of prompts; each answer will go towards your generated HTML file! You should see the message "HTML Generated" after all the prompts are answered.
 
 6. Close the terminal and open your Team-Profile-Gen folder. From there, open the "dist" folder and you can find your newly generated HTML file inside! You can open this file  directly to your browser,inside VS Code, or any code editor that you prefer.
 
