@@ -26,7 +26,7 @@ const copyFile = () => {
 
             resolve({
                 ok: true,
-                message: 'CSS Copied!'
+                message: 'CSS Applied!'
             });
         });
     });

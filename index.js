@@ -29,11 +29,11 @@ const appPrompts = [
         name: 'managerID',
         message: "Please Provide the Manager's Id number",
         validate: manageridInput => {
-            if (manageridInput) {
-                return true;
-            } else {
-                console.log(alert);
+            if (isNaN(manageridInput)) {
+                console.log("Please enter a numerical value");
                 return false;
+            } else {
+                return true;
             }
         }
     },
@@ -57,11 +57,12 @@ const appPrompts = [
         name: 'managerOfficeNumber',
         message: "Please Provide the Manager's Office Number",
         validate: managerofficenumberInput => {
-            if (managerofficenumberInput) {
-                return true;
-            } else {
-                console.log(alert);
+            if (isNaN(managerofficenumberInput)) 
+            {
+                console.log("Please enter a numerical value");
                 return false;
+            } else {
+                return true;
             }
         }
     },
@@ -84,7 +85,7 @@ const appPrompts = [
                 type: 'input',
                 name: 'engineerName',
                 message: "What is the Engineer's name?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Engineer') return true;
                     else return false;
                 }
@@ -94,9 +95,18 @@ const appPrompts = [
                 type: 'input',
                 name: 'engineerID',
                 message: "What is the Engineer's ID Number?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Engineer') return true;
                     else return false;
+                },
+                validate: engineeridInput => {
+                    if (isNaN(engineeridInput)) 
+                    {
+                        console.log("Please enter a numerical value");
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             },
 
@@ -104,7 +114,7 @@ const appPrompts = [
                 type: 'input',
                 name: 'engineerEmail',
                 message: "What is the Engineer's Email Address?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Engineer') return true;
                     else return false;
                 }
@@ -114,19 +124,19 @@ const appPrompts = [
                 type: 'input',
                 name: 'engineerGithub',
                 message: "What is the Engineer's Github Username?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Engineer') return true;
                     else return false;
                 }
-               
+
             },
-            
+
 
             {
                 type: 'input',
                 name: 'internName',
                 message: "What is the Intern's name?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Intern') return true;
                     else return false;
                 }
@@ -136,17 +146,27 @@ const appPrompts = [
                 type: 'input',
                 name: 'internID',
                 message: "What is the Intern's ID Number?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Intern') return true;
                     else return false;
+                },
+                validate: internidInput => {
+                    if (isNaN(internidInput)) 
+                    {
+                        console.log("Please enter a numerical value");
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
+                
             },
 
             {
                 type: 'input',
                 name: 'internEmail',
                 message: "What is the Intern's Email Address?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Intern') return true;
                     else return false;
                 }
@@ -156,7 +176,7 @@ const appPrompts = [
                 type: 'input',
                 name: 'internSchool',
                 message: "What School is the Intern Enrolled in?",
-                when: ({employee}) => {
+                when: ({ employee }) => {
                     if (employee === 'Intern') return true;
                     else return false;
                 }
@@ -171,11 +191,11 @@ inquirer.prompt(appPrompts)
         mgrArr.push(manager);
 
 
-        if(answers.more){
-            for(let i=0; i<answers.more.length; i++){
-                if(answers.more[i].employee === 'Engineer'){
+        if (answers.more) {
+            for (let i = 0; i < answers.more.length; i++) {
+                if (answers.more[i].employee === 'Engineer') {
                     const engineer = new Engineer(answers.more[i].engineerName, answers.more[i].engineerID, answers.more[i].engineerEmail, answers.more[i].engineerGithub);
-                    engrArr.push(engineer);  
+                    engrArr.push(engineer);
                 } else {
                     const intern = new Intern(answers.more[i].internName, answers.more[i].internID, answers.more[i].internEmail, answers.more[i].internSchool);
                     internArr.push(intern);
@@ -185,7 +205,7 @@ inquirer.prompt(appPrompts)
         return;
     })
     .then(() => {
-        return generateHTML(mgrArr,engrArr,internArr);
+        return generateHTML(mgrArr, engrArr, internArr);
     })
     .then(pageHTML => {
         return writeFile(pageHTML);
