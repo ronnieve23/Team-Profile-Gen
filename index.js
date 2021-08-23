@@ -27,9 +27,10 @@ const appPrompts = [
     {
         type: 'input',
         name: 'managerID',
-        message: "Please Provide the Manager's Id number",
+        message: "Please Provide the Manager's Id Number",
         validate: manageridInput => {
-            if (isNaN(manageridInput)) {
+            if (isNaN(manageridInput)) 
+            {
                 console.log("Please enter a numerical value");
                 return false;
             } else {
